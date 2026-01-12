@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel - Sarkari Job Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      background: white; 
+      border-radius: 15px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .header { 
+      background: linear-gradient(135deg, #e74c3c, #c0392b); 
+      color: white; 
+      padding: 25px; 
+      text-align: center;
+      position: relative;
+    }
+    
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+    }
+    
+    .logout-btn:hover { background: rgba(255,255,255,0.3); }
+    
+    .content { padding: 40px; }
+    
+    .form-section, .jobs-section { 
+      background: #f8f9fa; 
+      padding: 30px; 
+      border-radius: 12px; 
+      margin-bottom: 30px;
+      border-left: 5px solid #3498db;
+    }
+    
+    .form-section h2 { color: #2c3e50; margin-bottom: 20px; }
+    
+    input, select, textarea, button { 
+      width: 100%; 
+      padding: 15px; 
+      margin: 10px 0; 
+      border: 2px solid #e1e8ed; 
+      border-radius: 8px; 
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, select:focus, textarea:focus { 
+      outline: none; 
+      border-color: #3498db; 
+      box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+    }
+    
+    button { 
+      background: linear-gradient(135deg, #27ae60, #229954); 
+      color: white; 
+      border: none; 
+      cursor: pointer; 
+      font-size: 18px; 
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    button:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 10px 20px rgba(39,174,96,0.3);
+    }
+    
+    .jobs-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 15px; 
+      margin-top: 20px;
+    }
+    
+    .job-card { 
+      background: white; 
+      padding: 20px; 
+      border-radius: 10px; 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid #3498db;
+      position: relative;
+    }
+    
+    .job-title { font-size: 16px; font-weight: bold; color: #2c3e50; margin-bottom: 8px; }
+    .job-meta { color: #7f8c8d; font-size: 14px; margin-bottom: 10px; }
+    .delete-btn { 
+      position: absolute; 
+      top: 15px; 
+      right: 15px; 
+      background: #e74c3c; 
+      color: white; 
+      border: none; 
+      width: 35px; 
+      height: 35px; 
+      border-radius: 50%; 
+      cursor: pointer; 
+      font-size: 16px;
+    }
+    
+    .delete-btn:hover { background: #c0392b; }
+    
+    .stats { 
+      display: flex; 
+      justify-content: space-around; 
+      background: white; 
+      padding: 20px; 
+      border-radius: 10px; 
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .stat { 
+      flex: 1; 
+    }
+    
+    .stat-number { font-size: 28px; font-weight: bold; color: #3498db; }
+    .stat-label { color: #7f8c8d; margin-top: 5px; }
+    
+    @media (max-width: 768px) {
+      .content { padding: 20px; }
+      .jobs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER WITH LOGOUT -->
+    <div class="header">
+      <h1>⚙️ Sarkari Job Portal - Admin Dashboard</h1>
+      <p>Manage Latest Jobs, Results & Admit Cards</p>
+      <a href="/admin-logout" class="logout-btn">🚪 Logout</a>
+    </div>
+    
+    <div class="content">
+      <!-- STATS DASHBOARD -->
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" id="totalJobs"><%= jobs.length %></div>
+          <div class="stat-label">Total Updates</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" style="color: #27ae60;"><%= jobs.filter(j=>j.category==='Latest Job').length %></div>
+          <div class="stat-label">Latest Jobs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" style="color: #f39c12;"><%= jobs.filter(j=>j.category==='Result').length %></div>
+          <div class="stat-label">Results</div>
+        </div>
+      </div>
+      
+      <!-- ADD NEW JOB FORM -->
+      <div class="form-section">
+        <h2>➕ Add New Update</h2>
+        <form id="jobForm">
+          <input type="text" id="title" placeholder="Job Title / Result Name (e.g: SSC CGL 2026)" required>
+          <select id="category" required>
+            <option value="">Select Category</option>
+            <option value="Latest Job">📢 Latest Jobs</option>
+            <option value="Result">📊 Results</option>
+            <option value="Admit Card">🎫 Admit Cards</option>
+          </select>
+          <input type="url" id="link" placeholder="https://ssc.gov.in/apply">
+          <input type="text" id="lastDate" placeholder="25/02/2026">
+          <textarea id="description" rows="3" placeholder="Short description / eligibility / vacancies..."></textarea>
+          <button type="submit">🚀 Publish Update</button>
+        </form>
+      </div>
+      
+      <!-- RECENT JOBS LIST -->
+      <div class="jobs-section">
+        <h2>📋 Recently Added (<%= jobs.length %>)</h2>
+        <div class="jobs-grid" id="jobsGrid">
+          <% if (jobs.length > 0) { %>
+            <% jobs.slice(0, 12).forEach(job => { %>
+              <div class="job-card">
+                <button class="delete-btn" onclick="deleteJob('<%= job._id %>')">🗑️</button>
+                <div class="job-title"><%= job.title %></div>
+                <div class="job-meta">
+                  <span><%= job.category %></span> 
+                  <% if(job.lastDate) { %>• <%= job.lastDate %><% } %>
+                </div>
+                <% if(job.description) { %>
+                  <div style="margin-top:10px;color:#555;font-size:14px;"><%= job.description %></div>
+                <% } %>
+                <% if(job.link) { %>
+                  <a href="<%= job.link %>" target="_blank" style="color:#3498db;font-weight:bold;">🔗 View Link</a>
+                <% } %>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <div style="text-align:center;padding:40px;color:#7f8c8d;">
+              <h3>🎉 No updates yet!</h3>
+              <p>Add your first job using the form above</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Add new job
+    document.getElementById('jobForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        title: document.getElementById('title').value,
+        category: document.getElementById('category').value,
+        link: document.getElementById('link').value,
+        lastDate: document.getElementById('lastDate').value,
+        description: document.getElementById('description').value
+      };
+      
+      try {
+        const response = await fetch('/api/jobs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('✅ Update published successfully!');
+          location.reload(); // Refresh to show new job
+        }
+      } catch (error) {
+        alert('❌ Error adding job. Try again.');
+      }
+    });
+    
+    // Delete job
+    async function deleteJob(id) {
+      if (confirm('Delete this update?')) {
+        try {
+          const response = await fetch(`/api/jobs/${id}`, { method: 'DELETE' });
+          const result = await response.json();
+          if (result.success) {
+            location.reload();
+          }
+        } catch (error) {
+          alert('❌ Delete failed');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

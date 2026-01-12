@@ -2,13 +2,19 @@
 <html>
 <head>
     <title>SARKARI JOB PORTAL | Latest Govt Jobs 2026 | Sarkari Naukri Delhi NCR</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SARKARI JOB PORTAL - Latest Sarkari Naukri 2026, SSC CGL UPSC Railway Banking Police Delhi NCR Govt Jobs">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Arial', sans-serif; background: #f8f9fa; line-height: 1.6; color: #333; }
+        body { 
+            font-family: 'Arial', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+            background: #f8f9fa; 
+            line-height: 1.6; 
+            color: #333; 
+            overflow-x: hidden;
+        }
         
-        /* Header - CLEAN NO ADMIN */
+        /* Header - FULLY RESPONSIVE */
         .header { 
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); 
             color: white; 
@@ -21,39 +27,53 @@
         .header-content { 
             max-width: 1200px; 
             margin: 0 auto; 
-            padding: 0 2rem; 
+            padding: 0 1.5rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
         }
         .logo { 
-            font-size: 2.2rem; 
+            font-size: clamp(1.5rem, 5vw, 2.2rem); 
             font-weight: bold; 
             color: white; 
             text-decoration: none;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        .header-nav { display: flex; gap: 2rem; align-items: center; }
+        .header-nav { display: flex; gap: 1.5rem; align-items: center; }
         .header-nav a { 
             color: white; 
             text-decoration: none; 
             font-weight: 500; 
-            padding: 0.7rem 1.5rem; 
+            padding: 0.6rem 1.2rem; 
             border-radius: 25px; 
             transition: all 0.3s;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            white-space: nowrap;
         }
         .header-nav a:hover { 
             background: rgba(255,255,255,0.2); 
             transform: translateY(-2px);
         }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
         
-        /* Hero Section */
+        /* Hero Section - MOBILE PERFECT */
         .hero { 
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
             color: white; 
             text-align: center; 
-            padding: 5rem 2rem; 
+            padding: clamp(3rem, 8vw, 5rem) 1.5rem; 
             position: relative;
             overflow: hidden;
         }
@@ -70,13 +90,13 @@
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
         .hero-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
         .hero h1 { 
-            font-size: clamp(2.2rem, 5vw, 3.5rem); 
+            font-size: clamp(1.8rem, 7vw, 3.5rem); 
             margin-bottom: 1rem; 
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
         }
         .hero-subtitle { 
-            font-size: 1.4rem; 
-            margin-bottom: 2.5rem; 
+            font-size: clamp(1rem, 4vw, 1.4rem); 
+            margin-bottom: 2rem; 
             opacity: 0.95;
         }
         .search-container { 
@@ -84,30 +104,32 @@
             border-radius: 50px; 
             padding: 3px; 
             box-shadow: 0 15px 40px rgba(0,0,0,0.3); 
-            max-width: 700px; 
+            max-width: min(90vw, 700px); 
             margin: 0 auto 2rem;
             display: flex;
+            flex-direction: column;
         }
         .search-input { 
-            flex: 1; 
-            padding: 1.3rem 2rem; 
+            padding: 1.2rem 1.5rem; 
             border: none; 
-            border-radius: 50px; 
-            font-size: 1.2rem; 
+            border-radius: 25px; 
+            font-size: clamp(1rem, 4vw, 1.2rem); 
             background: none; 
-            min-width: 0;
+            width: 100%;
         }
         .search-input:focus { outline: none; }
         .search-btn { 
-            padding: 1.3rem 3rem; 
+            padding: 1.2rem 2.5rem; 
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); 
             color: white; 
             border: none; 
-            border-radius: 50px; 
-            font-size: 1.2rem; 
+            border-radius: 25px; 
+            font-size: clamp(1rem, 3.5vw, 1.2rem); 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.3s; 
+            margin-top: 0.5rem;
+            align-self: center;
             white-space: nowrap;
         }
         .search-btn:hover { 
@@ -115,15 +137,11 @@
             box-shadow: 0 15px 35px rgba(220,53,69,0.4); 
         }
         
-        /* Categories Section */
-        .categories-section { 
-            padding: 4rem 0; 
-            background: white;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        /* Container & Sections */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
         .section-title { 
             text-align: center; 
-            font-size: clamp(1.8rem, 4vw, 2.5rem); 
+            font-size: clamp(1.6rem, 5vw, 2.5rem); 
             margin-bottom: 3rem; 
             color: #2c3e50;
             position: relative;
@@ -138,14 +156,17 @@
             height: 4px; 
             background: linear-gradient(135deg, #dc3545, #c82333);
         }
+        
+        /* Categories - MOBILE GRID */
+        .categories-section { padding: clamp(2rem, 8vw, 4rem) 0; background: white; }
         .category-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 2rem; 
+            grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 25vw, 220px), 1fr)); 
+            gap: clamp(1rem, 4vw, 2rem); 
         }
         .category-card { 
             background: linear-gradient(135deg, #f8f9fa 0%, white 100%); 
-            padding: 2.5rem 1.5rem; 
+            padding: clamp(1.5rem, 6vw, 2.5rem) 1rem; 
             text-align: center; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
@@ -168,22 +189,31 @@
         }
         .category-card:hover::before { left: 100%; }
         .category-card:hover { 
-            transform: translateY(-15px) scale(1.02); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2); 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
         }
-        .category-icon { font-size: 4rem; margin-bottom: 1.5rem; display: block; }
-        .category-card h3 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: bold; color: #2c3e50; }
-        .category-card p { color: #666; font-size: 1rem; }
+        .category-icon { font-size: clamp(2.5rem, 12vw, 4rem); margin-bottom: 1rem; display: block; }
+        .category-card h3 { 
+            font-size: clamp(1.1rem, 4vw, 1.4rem); 
+            margin-bottom: 0.8rem; 
+            font-weight: bold; 
+            color: #2c3e50; 
+        }
+        .category-card p { 
+            color: #666; 
+            font-size: clamp(0.85rem, 3vw, 1rem); 
+        }
         
-        /* Latest Jobs */
+        /* Jobs - PERFECT MOBILE */
         .jobs-section { 
-            padding: 5rem 0; 
+            padding: clamp(3rem, 10vw, 5rem) 0; 
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
         .jobs-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
-            gap: 2.5rem; 
+            grid-template-columns: repeat(auto-fit, minmax(clamp(320px, 90vw, 380px), 1fr)); 
+            gap: clamp(1.5rem, 5vw, 2.5rem); 
+            justify-items: center;
         }
         .job-card { 
             background: white; 
@@ -192,6 +222,8 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
             transition: all 0.4s; 
             border-left: 6px solid #dc3545;
+            width: 100%;
+            max-width: 400px;
         }
         .job-card:hover { 
             transform: translateY(-10px); 
@@ -200,38 +232,40 @@
         .job-header { 
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); 
             color: white; 
-            padding: 2rem; 
+            padding: clamp(1.5rem, 6vw, 2rem); 
         }
         .job-title { 
-            font-size: 1.5rem; 
+            font-size: clamp(1.2rem, 5vw, 1.5rem); 
             font-weight: bold; 
             margin-bottom: 0.8rem; 
             line-height: 1.3;
         }
         .job-meta { 
             display: flex; 
-            gap: 1.5rem; 
-            font-size: 1rem; 
+            flex-wrap: wrap;
+            gap: 1rem; 
+            font-size: clamp(0.9rem, 3.5vw, 1rem); 
             opacity: 0.95;
         }
-        .job-body { padding: 2rem; }
+        .job-body { padding: clamp(1.5rem, 6vw, 2rem); }
         .job-description { 
             color: #555; 
             margin-bottom: 1.5rem; 
             line-height: 1.7;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
         }
         .job-footer { 
-            padding: 0 2rem 2rem; 
+            padding: 0 clamp(1.5rem, 6vw, 2rem) clamp(1.5rem, 6vw, 2rem); 
             border-top: 1px solid #e9ecef; 
         }
         .apply-btn { 
             width: 100%; 
-            padding: 1.3rem; 
+            padding: clamp(1rem, 5vw, 1.3rem); 
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); 
             color: white; 
             border: none; 
             border-radius: 12px; 
-            font-size: 1.2rem; 
+            font-size: clamp(1rem, 4vw, 1.2rem); 
             font-weight: bold; 
             cursor: pointer; 
             transition: all 0.3s; 
@@ -244,9 +278,9 @@
             box-shadow: 0 10px 30px rgba(220,53,69,0.4);
         }
         .job-status { 
-            padding: 0.6rem 1.5rem; 
+            padding: clamp(0.5rem, 3vw, 0.6rem) 1rem; 
             border-radius: 25px; 
-            font-size: 0.95rem; 
+            font-size: clamp(0.8rem, 3vw, 0.95rem); 
             font-weight: bold; 
             display: inline-block; 
             margin-top: 1rem;
@@ -258,22 +292,23 @@
         .empty-state { 
             grid-column: 1 / -1; 
             text-align: center; 
-            padding: 5rem 2rem; 
+            padding: clamp(3rem, 12vw, 5rem) 1rem; 
             color: #666;
         }
-        .empty-state h3 { font-size: 2rem; margin-bottom: 1rem; color: #dc3545; }
+        .empty-state h3 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 1rem; color: #dc3545; }
+        .empty-state p { font-size: clamp(1rem, 4vw, 1.2rem); }
         
-        /* Footer - CLEAN NO ADMIN */
+        /* Footer */
         .footer { 
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); 
             color: white; 
             text-align: center; 
-            padding: 4rem 2rem 2rem;
+            padding: clamp(2rem, 8vw, 4rem) 1.5rem 1.5rem;
         }
         .footer-links { 
             display: flex; 
             justify-content: center; 
-            gap: 3rem; 
+            gap: clamp(1rem, 4vw, 3rem); 
             margin-bottom: 2rem; 
             flex-wrap: wrap;
         }
@@ -281,33 +316,74 @@
             color: #bdc3c7; 
             text-decoration: none; 
             transition: color 0.3s;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
         .footer-links a:hover { color: white; }
-        .footer p { opacity: 0.9; }
+        .footer p { 
+            opacity: 0.9; 
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            line-height: 1.5;
+        }
         
-        /* Responsive */
+        /* RESPONSIVE BREAKPOINTS - PERFECT MOBILE */
         @media (max-width: 768px) {
-            .header-nav { gap: 1rem; }
-            .hero h1 { font-size: 2rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .search-container { flex-direction: column; }
-            .search-input { border-radius: 25px; margin-bottom: 3px; }
-            .jobs-grid { grid-template-columns: 1fr; }
-            .category-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-            .footer-links { gap: 1.5rem; flex-direction: column; }
+            .header-content { padding: 0 1rem; }
+            .header-nav { 
+                display: none; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0; 
+                background: rgba(220,53,69,0.98); 
+                flex-direction: column; 
+                padding: 1rem; 
+                gap: 1rem;
+            }
+            .header-nav.active { display: flex; }
+            .hamburger { display: flex; }
+            
+            .hero { padding: 2.5rem 1rem; }
+            .search-container { padding: 2px; }
+            .search-btn { margin-top: 0.75rem; }
+            
+            .container { padding: 0 1rem; }
+            .jobs-grid { grid-template-columns: 1fr; width: 100%; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .category-grid { grid-template-columns: 1fr; }
+            .job-meta { flex-direction: column; gap: 0.5rem; }
+            .footer-links { flex-direction: column; gap: 0.75rem; }
+        }
+        
+        /* Scroll Animations */
+        .job-card, .category-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .job-card.animate, .category-card.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Header - NO ADMIN LINKS -->
+    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <a href="/" class="logo">🔴 SARKARI JOB PORTAL</a>
-            <nav class="header-nav">
+            <nav class="header-nav" id="navMenu">
                 <a href="#categories">Categories</a>
                 <a href="#jobs">Latest Jobs</a>
                 <a href="#">Contact</a>
             </nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
@@ -331,32 +407,32 @@
                 <a href="#" class="category-card">
                     <span class="category-icon">📚</span>
                     <h3>SSC Jobs</h3>
-                    <p>CGL • CHSL • MTS • GD Constable</p>
+                    <p>CGL • CHSL • MTS • GD</p>
                 </a>
                 <a href="#" class="category-card">
                     <span class="category-icon">👨‍🎓</span>
                     <h3>UPSC</h3>
-                    <p>CSE • CDS • NDA • IES</p>
+                    <p>CSE • CDS • NDA</p>
                 </a>
                 <a href="#" class="category-card">
                     <span class="category-icon">🚂</span>
                     <h3>Railway</h3>
-                    <p>NTPC • Group D • ALP • Technician</p>
+                    <p>NTPC • Group D • ALP</p>
                 </a>
                 <a href="#" class="category-card">
                     <span class="category-icon">🏦</span>
                     <h3>Banking</h3>
-                    <p>IBPS PO • Clerk • SBI • RBI Grade B</p>
+                    <p>IBPS PO • Clerk • SBI</p>
                 </a>
                 <a href="#" class="category-card">
                     <span class="category-icon">👮</span>
                     <h3>Police Jobs</h3>
-                    <p>Delhi Police • Constable • SI • CAPF</p>
+                    <p>Delhi Police • SI</p>
                 </a>
                 <a href="#" class="category-card">
                     <span class="category-icon">👩‍🏫</span>
                     <h3>Teaching</h3>
-                    <p>CTET • TET • TGT • PGT • KVS • NVS</p>
+                    <p>CTET • TGT • PGT</p>
                 </a>
             </div>
         </div>
@@ -402,14 +478,14 @@
             <% } %>
             
             <div style="text-align: center; margin-top: 4rem;">
-                <a href="#" class="apply-btn" style="display: inline-block; width: auto; padding: 1.3rem 3rem; font-size: 1.3rem;">
-                    📋 View All Jobs (Coming Soon)
+                <a href="#" class="apply-btn" style="display: inline-block; width: auto; padding: clamp(1rem, 5vw, 1.3rem) clamp(2rem, 8vw, 3rem); font-size: clamp(1.1rem, 4vw, 1.3rem);">
+                    📋 View All Jobs
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer - NO ADMIN LINKS -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
             <a href="#">About</a>
@@ -423,55 +499,66 @@
     </footer>
 
     <script>
+        // Mobile hamburger menu
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('active');
+        }
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.header-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
         // Search functionality
         document.querySelector('.search-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const query = this.value.trim();
                 if (query) {
-                    alert(`🔍 Searching for "${query}" Govt Jobs...\n\n✅ Feature coming soon!\n\n💡 Try: SSC CGL, UPSC CSE, Railway NTPC, Delhi Police`);
+                    alert(`🔍 Searching for "${query}" Govt Jobs...\n\n✅ Feature coming soon!\n💡 Try: SSC CGL, UPSC CSE, Railway NTPC, Delhi Police`);
                     this.value = '';
                 }
             }
         });
 
-        // Smooth scrolling for anchor links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
+                const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+                // Close mobile menu
+                document.getElementById('navMenu').classList.remove('active');
             });
         });
 
         // Category click handlers
-        document.querySelectorAll('.category-card').forEach(card => {
+        document.querySelectorAll('.category-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
             card.addEventListener('click', function(e) {
-                if (this.querySelector('h3')) {
-                    e.preventDefault();
-                    const category = this.querySelector('h3').textContent;
-                    alert(`📂 Showing ${category} jobs...\n\n✅ Category filter coming soon!\n\n💡 Check back daily for new jobs! 🚀`);
-                }
+                e.preventDefault();
+                const category = this.querySelector('h3').textContent;
+                alert(`📂 Showing ${category} jobs...\n\n✅ Category filter coming soon!\n💡 Check back daily for new jobs! 🚀`);
             });
         });
 
-        // Animate job cards on scroll
+        // Scroll animations
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, index * 100);
                 }
             });
-        });
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.job-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
+        document.querySelectorAll('.job-card, .category-card').forEach(el => {
+            observer.observe(el);
         });
 
         // Header scroll effect
@@ -483,6 +570,13 @@
             } else {
                 header.style.background = 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
                 header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Prevent zoom on iOS inputs
+        document.querySelector('.search-input').addEventListener('focus', function() {
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                this.setAttribute('inputmode', 'search');
             }
         });
     </script>

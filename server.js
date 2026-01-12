@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 // Admin credentials
 const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'sarkari123';
+const ADMIN_PASSWORD = 'Admin@Portal26';
 
 // Admin middleware
 function isAdminLoggedIn(req, res, next) {

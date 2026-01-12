@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Arial', sans-serif; background: #f8f9fa; line-height: 1.6; color: #333; }
         
-        /* Header - SARKARI JOB PORTAL Red Branding */
+        /* Header - CLEAN NO ADMIN */
         .header { 
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); 
             color: white; 
@@ -46,11 +46,6 @@
         .header-nav a:hover { 
             background: rgba(255,255,255,0.2); 
             transform: translateY(-2px);
-        }
-        .admin-link { 
-            background: rgba(255,255,255,0.2); 
-            padding: 0.7rem 1.5rem !important; 
-            border-radius: 25px !important;
         }
         
         /* Hero Section */
@@ -91,6 +86,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.3); 
             max-width: 700px; 
             margin: 0 auto 2rem;
+            display: flex;
         }
         .search-input { 
             flex: 1; 
@@ -267,7 +263,7 @@
         }
         .empty-state h3 { font-size: 2rem; margin-bottom: 1rem; color: #dc3545; }
         
-        /* Footer */
+        /* Footer - CLEAN NO ADMIN */
         .footer { 
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); 
             color: white; 
@@ -303,14 +299,14 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - NO ADMIN LINKS -->
     <header class="header">
         <div class="header-content">
             <a href="/" class="logo">🔴 SARKARI JOB PORTAL</a>
             <nav class="header-nav">
                 <a href="#categories">Categories</a>
                 <a href="#jobs">Latest Jobs</a>
-                <a href="/admin-login" class="admin-link">👨‍💼 Admin Panel</a>
+                <a href="#">Contact</a>
             </nav>
         </div>
     </header>
@@ -400,13 +396,8 @@
                 </div>
             <% } else { %>
                 <div class="empty-state">
-                    <h3>📝 No Jobs Yet!</h3>
-                    <p>Admin please add latest Sarkari Naukri from <a href="/admin-login" style="color: #dc3545; font-weight: bold;">Admin Panel</a></p>
-                    <div style="margin-top: 2rem;">
-                        <a href="/admin-login" class="apply-btn" style="display: inline-block; width: auto; padding: 1rem 2rem;">
-                            👨‍💼 Admin Login
-                        </a>
-                    </div>
+                    <h3>📝 Latest Jobs Coming Soon!</h3>
+                    <p>Stay tuned for Delhi NCR Government Job Updates.<br>Bookmark & check daily for new Sarkari Naukri!</p>
                 </div>
             <% } %>
             
@@ -418,17 +409,17 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer - NO ADMIN LINKS -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="#">About Sarkari Job Portal</a>
-            <a href="#">Contact Us</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
             <a href="#">Sitemap</a>
-            <a href="/admin-login">Admin Panel</a>
         </div>
-        <p>© 2026 SARKARI JOB PORTAL • Trusted Govt Jobs Portal • Delhi NCR Focus • <strong>🚀 Fastest Updates</strong></p>
+        <p>© 2026 SARKARI JOB PORTAL • Trusted Govt Jobs Portal • Delhi NCR Focus • <strong>🚀 Fastest Updates</strong><br>
+        ⚠️ Information only. Apply on official government websites. No fees. No guarantees.</p>
     </footer>
 
     <script>
@@ -461,7 +452,7 @@
                 if (this.querySelector('h3')) {
                     e.preventDefault();
                     const category = this.querySelector('h3').textContent;
-                    alert(`📂 Showing ${category} jobs...\n\n✅ Category filter coming soon!\n\n💡 Add jobs from Admin Panel first 🚀`);
+                    alert(`📂 Showing ${category} jobs...\n\n✅ Category filter coming soon!\n\n💡 Check back daily for new jobs! 🚀`);
                 }
             });
         });

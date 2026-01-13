@@ -404,81 +404,70 @@
     </footer>
 
     <script>
-        let currentType = '';
-        let currentId = '';
-
-        function showDetails(type, id) {
-            currentType = type;
-            currentId = id;
-            
-            let content = '';
-            if (type === 'job' && jobs) {
-                const job = jobs.find(j => j._id === id);
-                if (job) {
-                    content = `
-                        <h2>🔥 ${job.title}</h2>
-                        <p><strong>Category:</strong> ${job.category}</p>
-                        <p><strong>Last Date:</strong> ${new Date(job.lastDate).toLocaleDateString('en-IN')}</p>
-                        <p><strong>Description:</strong> ${job.description || 'Latest government job opportunity'}</p>
-                        <a href="${job.link}" target="_blank" class="apply-btn" style="margin-top: 20px;">🚀 Apply Now</a>
-                    `;
-                }
-            } else if (type === 'result') {
+       <script>
+    // Make jobs globally accessible
+    window.jobsData = <%- JSON.stringify(jobs || []) %>;
+    
+    function showDetails(type, id) {
+        let content = '';
+        
+        if (type === 'job') {
+            const job = window.jobsData.find(j => j._id == id);
+            if (job) {
                 content = `
-                    <h2>📋 ${getResultTitle(id)}</h2>
-                    <p>Result declared! Check your roll number below:</p>
-                    <p><strong>Download Link:</strong> <a href="#" style="color: #dc3545;">Official Result PDF</a></p>
-                    <p><strong>Cutoff:</strong> General: 150 | OBC: 140 | SC: 130</p>
+                    <h2 style="color: #dc3545; margin-bottom: 20px;">🔥 ${job.title}</h2>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p><strong>🏷️ Category:</strong> ${job.category}</p>
+                        <p><strong>📅 Important Date:</strong> ${new Date(job.impDate).toLocaleDateString('en-IN')}</p>
+                        <p><strong>📄 Description:</strong><br>${job.description || 'Latest government update'}</p>
+                        
+                        ${job.primaryLink ? `
+                        <a href="${job.primaryLink}" target="_blank" class="apply-btn" style="margin: 15px 0 10px 0; display: inline-block;">
+                            🚀 Visit Primary Link
+                        </a>
+                        ` : ''}
+                        
+                        ${job.secondaryLink ? `
+                        <a href="${job.secondaryLink}" target="_blank" class="apply-btn" style="background: #28a745; margin-left: 10px; display: inline-block;">
+                            📎 ${job.secondaryLinkName || 'Secondary Link'}
+                        </a>
+                        ` : ''}
+                    </div>
                 `;
-            } else if (type === 'admit') {
-                content = `
-                    <h2>🎫 ${getAdmitTitle(id)}</h2>
-                    <p>Admit card available! Download using roll number:</p>
-                    <p><strong>Download Link:</strong> <a href="#" style="color: #dc3545;">Official Admit Card</a></p>
-                    <p><strong>Exam Date:</strong> 15 February 2026</p>
-                `;
+            } else {
+                content = '<h2>Job not found!</h2>';
             }
-            
-            document.getElementById('modalBody').innerHTML = content;
-            document.getElementById('detailsModal').style.display = 'flex';
         }
+        
+        document.getElementById('modalBody').innerHTML = content;
+        document.getElementById('detailsModal').style.display = 'flex';
+    }
 
-        function closeModal() {
-            document.getElementById('detailsModal').style.display = 'none';
+    function closeModal() {
+        document.getElementById('detailsModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('detailsModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // Search functionality
+    document.querySelector('.search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            alert('🔍 Search coming soon!');
+            this.value = '';
         }
+    });
 
-        function getResultTitle(id) {
-            const titles = {
-                '1': 'SSC CGL Tier 1 Result 2026',
-                '2': 'Delhi Police Constable Result',
-                '3': 'Railway NTPC Result'
-            };
-            return titles[id] || 'Result Declared';
-        }
-
-        function getAdmitTitle(id) {
-            const titles = {
-                '1': 'SSC CGL Tier 2 Admit Card',
-                '2': 'UPSC Prelims Admit Card',
-                '3': 'Delhi Police Admit Card'
-            };
-            return titles[id] || 'Admit Card Available';
-        }
-
-        // Search
-        document.querySelector('.search-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                alert('🔍 Search coming soon!');
-                this.value = '';
-            }
+    // Category clicks
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            alert('📂 Category filter coming soon!');
         });
+    });
+</script>
 
-        // Category click
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('click', function() {
-                alert('📂 Category filter coming soon!');
-            });
-        });
     </script>
 </body>
 </html>
